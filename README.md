@@ -34,7 +34,7 @@ To-do:
 
 ---
 
-### Person 3
+### Rahul Rayarala
 * Collection Features
 
 To-do:
