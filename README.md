@@ -37,7 +37,7 @@ To-do:
 ### Person 3
 * Collection Features
 
-Responsibilities:
+To-do:
 - Collection page
 - Add owned stickers
 - View missing stickers
@@ -50,7 +50,7 @@ Responsibilities:
 ### Person 4
 * Frontend / UI
 
-Responsibilities:
+To-do:
 - Homepage
 - Navigation bar
 - Overall website layout
