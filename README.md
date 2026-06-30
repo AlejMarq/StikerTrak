@@ -47,7 +47,7 @@ To-do:
 
 ---
 
-### Person 4
+### Michael Sutu
 * Frontend / UI
 
 To-do:
