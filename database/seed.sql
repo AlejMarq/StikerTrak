@@ -3,6 +3,7 @@
 INSERT INTO stickers (
     sticker_number,
     category,
+    section,
     title,
     player_name,
     country
@@ -10,6 +11,7 @@ INSERT INTO stickers (
 VALUES (
     'MEX-04',
     'Player',
+    'Mexico',
     NULL,
     'Jorge SANCHEZ',
     'Mexico'
