@@ -13,6 +13,7 @@ CREATE TABLE stickers (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     sticker_number TEXT NOT NULL UNIQUE,
     category TEXT NOT NULL,
+    section TEXT,
     title TEXT,
     player_name TEXT,
     country TEXT
