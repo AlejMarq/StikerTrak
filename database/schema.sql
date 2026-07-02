@@ -14,8 +14,7 @@ CREATE TABLE stickers (
     sticker_number TEXT NOT NULL UNIQUE,
     category TEXT NOT NULL,
     section TEXT,
-    title TEXT,
-    player_name TEXT,
+    name TEXT NOT NULL,
     country TEXT
 );
 
