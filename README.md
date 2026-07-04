@@ -22,7 +22,7 @@ To-do:
 
 ---
 
-### Person 2
+### Toriana Mullins
 * User Authentication
 
 To-do:
