@@ -1268,3 +1268,28 @@ VALUES
 ('CC-10', 'Coca-Cola Featured Player', 'Coca-Cola', 'WESTON MCKENNIE', 'USA'),
 ('CC-11', 'Coca-Cola Featured Player', 'Coca-Cola', 'LAUTARO MARTINEZ', 'Argentina'),
 ('CC-12', 'Coca-Cola Featured Player', 'Coca-Cola', 'GABRIEL MAGALHAES', 'Brazil');
+
+
+-- Special Stickers
+
+INSERT INTO stickers (sticker_number, category, section, name, country)
+VALUES
+('FWC-01', 'Official Emblem', 'Special', 'Official Emblem Top Half', NULL),
+('FWC-02', 'Official Emblem', 'Special', 'Official Emblem Bottom Half', NULL),
+('FWC-03', 'Mascot', 'Special', 'Official Mascots', NULL),
+('FWC-04', 'Logo', 'Special', 'FIFA Official Logo', NULL),
+('FWC-05', 'Official Ball', 'Special', 'Official Ball', NULL),
+('FWC-06', 'Host Country Emblem', 'Special', 'Canada Emblem', NULL),
+('FWC-07', 'Host Country Emblem', 'Special', 'Mexico Emblem', NULL),
+('FWC-08', 'Host Country Emblem', 'Special', 'USA Emblem', NULL),
+('FWC-09', 'Historic Winning Teams', 'Special', 'Italy 1934', NULL),
+('FWC-10', 'Historic Winning Teams', 'Special', 'Brazil 1950', NULL),
+('FWC-11', 'Historic Winning Teams', 'Special', 'Germany 1954', NULL),
+('FWC-12', 'Historic Winning Teams', 'Special', 'Brazil 1962', NULL),
+('FWC-13', 'Historic Winning Teams', 'Special', 'Germany 1974', NULL),
+('FWC-14', 'Historic Winning Teams', 'Special', 'Argentina 1986', NULL),
+('FWC-15', 'Historic Winning Teams', 'Special', 'Brazil 1994', NULL),
+('FWC-16', 'Historic Winning Teams', 'Special', 'Brazil 2002', NULL),
+('FWC-17', 'Historic Winning Teams', 'Special', 'Italy 2006', NULL),
+('FWC-18', 'Historic Winning Teams', 'Special', 'Germany 2014', NULL),
+('FWC-19', 'Historic Winning Teams', 'Special', 'Argentina 2022', NULL);
