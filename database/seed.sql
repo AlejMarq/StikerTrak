@@ -1253,3 +1253,18 @@ VALUES
 
 -- Coca-Cola Stickers
 
+
+INSERT INTO stickers (sticker_number, category, section, name, country)
+VALUES
+('CC-01', 'Coca-Cola Featured Player', 'Coca-Cola', 'LAMINE YAMAL', 'Spain'),
+('CC-02', 'Coca-Cola Featured Player', 'Coca-Cola', 'JOSHUA KIMMICH', 'Germany'),
+('CC-03', 'Coca-Cola Featured Player', 'Coca-Cola', 'HARRY KANE', 'England'),
+('CC-04', 'Coca-Cola Featured Player', 'Coca-Cola', 'SANTIAGO GIMENEZ', 'Mexico'),
+('CC-05', 'Coca-Cola Featured Player', 'Coca-Cola', 'ANTONEE ROBINSON', 'USA'),
+('CC-06', 'Coca-Cola Featured Player', 'Coca-Cola', 'JEFFERSON LERMA', 'Colombia'),
+('CC-07', 'Coca-Cola Featured Player', 'Coca-Cola', 'EDSON ALVAREZ', 'Mexico'),
+('CC-08', 'Coca-Cola Featured Player', 'Coca-Cola', 'VIRGIL VAN DIJK', 'Netherlands'),
+('CC-09', 'Coca-Cola Featured Player', 'Coca-Cola', 'ALPHONSO DAVIES', 'Canada'),
+('CC-10', 'Coca-Cola Featured Player', 'Coca-Cola', 'WESTON MCKENNIE', 'USA'),
+('CC-11', 'Coca-Cola Featured Player', 'Coca-Cola', 'LAUTARO MARTINEZ', 'Argentina'),
+('CC-12', 'Coca-Cola Featured Player', 'Coca-Cola', 'GABRIEL MAGALHAES', 'Brazil');
