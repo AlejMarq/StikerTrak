@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>StikerTrak Collection</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='collection.css') }}"
+    >
+</head>
+
+<body>
+
+    <header>
+        <h1>StikerTrak</h1>
+        <p>FIFA 2026 World Cup Sticker Collection Tracker</p>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Collection Progress</h2>
+
+            <p>Total Stickers: {{ progress[0] }}</p>
+
+            <p>Collected Stickers: {{ progress[1] }}</p>
+
+            <p>Missing Stickers: {{ progress[2] }}</p>
+
+            <p>Completion Percentage: {{ progress[3] }}%</p>
+        </section>
+
+        <section>
+            <h2>Add Sticker</h2>
+
+            <form
+                action="{{ url_for('collection_routes.add_sticker') }}"
+                method="POST"
+            >
+                <label for="sticker_number">
+                    Sticker Number:
+                </label>
+
+                <input
+                    type="text"
+                    id="sticker_number"
+                    name="sticker_number"
+                    placeholder="Example: MEX-04"
+                    required
+                >
+
+                <button type="submit">
+                    Add Sticker
+                </button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Owned Stickers</h2>
+
+            {% if owned_stickers %}
+
+                {% for sticker in owned_stickers %}
+
+                    <div class="sticker-card">
+                        <h3>{{ sticker[0] }}</h3>
+
+                        <p>Name: {{ sticker[3] }}</p>
+
+                        <p>Country: {{ sticker[4] }}</p>
+
+                        <p>Quantity: {{ sticker[5] }}</p>
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>No owned stickers found.</p>
+
+            {% endif %}
+        </section>
+
+        <section>
+            <h2>Missing Stickers</h2>
+
+            {% if missing_stickers %}
+
+                {% for sticker in missing_stickers %}
+
+                    <div class="sticker-card">
+                        <h3>{{ sticker[0] }}</h3>
+
+                        <p>Name: {{ sticker[3] }}</p>
+
+                        <p>Country: {{ sticker[4] }}</p>
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>No missing stickers found.</p>
+
+            {% endif %}
+        </section>
+
+        <section>
+            <h2>Duplicate Stickers</h2>
+
+            {% if duplicate_stickers %}
+
+                {% for sticker in duplicate_stickers %}
+
+                    <div class="sticker-card">
+                        <h3>{{ sticker[0] }}</h3>
+
+                        <p>Name: {{ sticker[3] }}</p>
+
+                        <p>Country: {{ sticker[4] }}</p>
+
+                        <p>
+                            Duplicate Amount:
+                            {{ sticker[5] - 1 }}
+                        </p>
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>No duplicate stickers found.</p>
+
+            {% endif %}
+        </section>
+
+    </main>
+
+</body>
+
+</html>
