@@ -18,6 +18,16 @@ def initialize_database(reset=False):
     connection = sqlite3.connect(DATABASE_PATH)
 
     connection.executescript(SCHEMA_PATH.read_text())
+
+    import re
+    from collections import Counter
+
+    text = SEED_PATH.read_text()
+    numbers = re.findall(r"'([A-Z]{2,4}-\d{2})'", text)
+
+    duplicates = [n for n, c in Counter(numbers).items() if c > 1]
+    print(duplicates)
+
     connection.executescript(SEED_PATH.read_text())
 
     connection.commit()

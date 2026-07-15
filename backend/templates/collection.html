@@ -21,21 +21,22 @@
             <a href="/collection">Collection</a>
         </div>
         <div class="center btn-container">
-            <button class="btn-white" onclick="window.location.href = '/login'">Login</button>
-            <button onclick="window.location.href = '/signup'">Sign Up</button>
+            <button class="btn-white" onclick="window.location.href = '/logout'">
+                Logout
+            </button>
         </div>
     </nav>
 
     <section class="section-collection">
         <div class="container-progress start column">
             <h3>Collection Progress</h3>
-            <div class="progress-circle" style="--progress: 10">
+            <div class="progress-circle" style="--progress: {{ progress[3] }}">
                 <div class="progress-center">
-                    <span>10%</span>
+                    <span>{{ progress[3] }}%</span>
                     <p>Complete</p>
                 </div>
             </div>
-            <a>98 / 980</a>
+            <a>{{ progress[1] }} / {{ progress[0] }}</a>
             <p>Stickers Collected</p>
         </div>
 
@@ -45,13 +46,13 @@
             <div class="catalog">
                 <div class="top split">
                     <div class="left start">
-                        <a class="selected">All Stickers</a>
-                        <a>Owned (0)</a>
-                        <a>Missing (0)</a>
-                        <a>Duplicates (0)</a>
+                        <a id="filter-all" class="selected">All Stickers</a>
+                        <a id="filter-owned">Owned ({{ progress[1] }})</a>
+                        <a id="filter-missing">Missing ({{ progress[2] }})</a>
+                        <a id="filter-duplicates">Duplicates ({{ duplicates|length }})</a>
                     </div>
                     <div class="right center">
-                        <input placeholder="Search stickers...">
+                        <input id="sticker-search" placeholder="Search stickers...">
                         <select id="sort">
                             <option value="number-asc">Number: Low to High</option>
                             <option value="number-desc">Number: High to Low</option>
@@ -61,32 +62,170 @@
                     </div>
                 </div>
 
-                <div class="stickers">
+            <div class="stickers">
+                {% for sticker in stickers %}
                     <div class="sticker">
-                        <div class="sticker-top">
-                            <a>1</a>
+                    <div class="sticker-top">
+                        <a>{{ sticker[0] }}</a>
+                        {% if sticker[0] in owned_stickers %}
                             <img src="/frontend/img/icon-check.png">
-                        </div>
-                        <img src="/frontend/img/sticker-messi.png">
-                        <div class="quantity-selector">
-                            <button type="button" class="quantity-button">−</button>
-                            <span class="quantity-value">1</span>
-                            <button type="button" class="quantity-button">+</button>
-                        </div>
-                    </div>
-
-                    <div class="sticker">
-                        <div class="sticker-top">
-                            <a>2</a>
+                        {% else %}
                             <img src="/frontend/img/icon-x.png">
-                        </div>
-                        <img src="/frontend/img/sticker-ronaldo.png">
-                        <button class="btn-white">Add</button>
+                        {% endif %}
                     </div>
+                        <h3>{{ sticker[3] }}</h3>
+                        {% if sticker[0] in owned_stickers %}
+                            <p class="quantity" data-quantity="{{ owned_stickers[sticker[0]] }}">
+                                <strong>Quantity:</strong> {{ owned_stickers[sticker[0]] }}
+                            </p>
+
+                            <form action="/decrease-sticker/{{ sticker[0] }}" method="POST">
+                                <button type="submit">−</button>
+                            </form>
+
+                            <form action="/add-sticker/{{ sticker[0] }}" method="POST">
+                                <button type="submit">+</button>
+                            </form>
+                        {% else %}
+                            <form action="/add-sticker/{{ sticker[0] }}" method="POST">
+                                <button type="submit" class="btn-white">Add</button>
+                            </form>
+                        {% endif %}
+                    </div>
+            {% endfor %}
+        </div>
+                
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        const searchInput = document.getElementById("sticker-search");
+        const ownedFilter = document.getElementById("filter-owned");
+        const missingFilter = document.getElementById("filter-missing");
+        const allFilter = document.getElementById("filter-all");
+        const duplicatesFilter = document.getElementById("filter-duplicates");
+        const stickerCards = document.querySelectorAll(".sticker");
+        const sortSelect = document.getElementById("sort");
+
+        let activeFilter = "all";
+
+        function applyFilters() {
+            const searchText = searchInput.value.toLowerCase();
+
+            stickerCards.forEach(function(card) {
+                const cardText = card.textContent.toLowerCase();
+                const matchesSearch = cardText.includes(searchText);
+                const isOwned = card.querySelector('img[src*="icon-check.png"]') !== null;
+
+                const quantityElement = card.querySelector(".quantity");
+                const isDuplicate =
+                    quantityElement && Number(quantityElement.dataset.quantity) > 1;
+
+                let matchesFilter = true;
+
+                if (activeFilter === "owned") {
+                    matchesFilter = isOwned;
+
+                }
+
+                if (activeFilter === "missing") {
+                    matchesFilter = !isOwned;
+                }
+
+                if (activeFilter === "duplicates") {
+                    matchesFilter = isDuplicate;
+                }
+
+                if (matchesSearch && matchesFilter) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        function applySorting() {
+            const stickerContainer = document.querySelector(".stickers");
+            const cardsArray = Array.from(stickerCards);
+            const sortBy = sortSelect.value;
+
+            if (sortBy === "number-asc") {
+                cardsArray.sort(function(a, b) {                   
+                    return a.textContent.localeCompare(b.textContent);
+                });
+            }
+
+            if (sortBy === "name-asc") {
+                cardsArray.sort(function(a, b) {
+                    const nameA = a.querySelector("h3").textContent;
+                    const nameB = b.querySelector("h3").textContent;
+
+                    return nameA.localeCompare(nameB);
+                });
+            }
+
+            if (sortBy === "number-desc") {
+                cardsArray.sort(function(a, b) {
+                    return b.textContent.localeCompare(a.textContent);
+                });
+            }
+
+            if (sortBy === "quantity-desc") {
+                cardsArray.sort(function(a, b) {
+                    const quantityA = a.querySelector(".quantity");
+                    const quantityB = b.querySelector(".quantity");
+
+                    const valueA = quantityA ? Number(quantityA.dataset.quantity) : 0;
+                    const valueB = quantityB ? Number(quantityB.dataset.quantity) : 0;
+
+                    return valueB - valueA;
+                });
+            }
+
+            cardsArray.forEach(function(card) {
+                stickerContainer.appendChild(card);
+            });
+
+        }
+
+        searchInput.addEventListener("input", function () {
+            applyFilters();
+        });
+        
+
+        ownedFilter.addEventListener("click", function () {
+            activeFilter = "owned";
+            applyFilters();
+        });
+
+
+        missingFilter.addEventListener("click", function () {
+            activeFilter = "missing";
+            applyFilters();
+        });
+
+
+        allFilter.addEventListener("click", function () {
+            activeFilter = "all";
+            applyFilters();
+        });
+
+
+        duplicatesFilter.addEventListener("click", function () {
+            activeFilter = "duplicates";
+            applyFilters();
+        });
+
+        sortSelect.addEventListener("change", function () {
+            applySorting();
+            applyFilters();
+        });
+
+
+</script>
+
 </body>
 
 </html>

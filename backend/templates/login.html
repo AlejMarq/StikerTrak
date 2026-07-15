@@ -30,11 +30,13 @@
         <div class="form-vertical">
             <h2>Welcome back!</h2>
             <p>Login to continue your collection</p>
-            <form>
+            <form method="POST">
                 <label>Email</label>
-                <input placeholder="Email">
+                <input name="username_or_email" placeholder="Email">
+                
                 <label>Password</label>
-                <input type="password" placeholder="Password">
+                <input name="password" type="password" placeholder="Password">
+                
                 <button type="submit">Login</button>
             </form>
             <p class="auth-redirect">Don't have an account? <a class="logo-green" href="/signup">Sign Up</a></p>

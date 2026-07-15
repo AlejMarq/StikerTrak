@@ -21,8 +21,8 @@
             <a href="/collection">Collection</a>
         </div>
         <div class="center btn-container">
-            <button class="btn-white" onclick="window.location.href = 'login.html'">Login</button>
-            <button onclick="window.location.href = 'signup.html'">Sign Up</button>
+            <button class="btn-white" onclick="window.location.href = '/login'">Login</button>
+            <button onclick="window.location.href = '/signup'">Sign Up</button>
         </div>
     </nav>
 
@@ -30,26 +30,36 @@
         <div class="form-vertical">
             <h2>Create Your Account</h2>
             <p>Join and start tracking your sticker collection</p>
-            <form>
+            {% if signup_error %}
+                <h3>{{ signup_error }}</h3>
+            {% endif %}
+
+            <form method="POST">
                 <div class="split container-name">
                     <div class="start column">
                         <label>First Name</label>
-                        <input placeholder="First Name">
+                        <input name="first_name" placeholder="First Name">
                     </div>
                     <div class="start column">
                         <label>Last Name</label>
-                        <input placeholder="Last Name">
+                        <input name="last_name" placeholder="Last Name">
                     </div>
                 </div>
                 <label>Username</label>
-                <input placeholder="Username">
+                <input name="username" placeholder="Username">
                 <label>Email</label>
-                <input placeholder="Email">
+                <input name="email" placeholder="Email">
                 <label>Password</label>
-                <input type="password" placeholder="Enter your password">
+                <input
+                    name="password"
+                    type="password"
+                    placeholder="Enter your password">
                 <button type="submit">Sign Up</button>
             </form>
-            <p class="auth-redirect">Already have an account? <a class="logo-green" href="login.html">Login</a></p>
+            <p class="auth-redirect">
+                Already have an account?
+                <a class="logo-green" href="/login">Login</a>
+            </p>
         </div>
     </section>
 </body>

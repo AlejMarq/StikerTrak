@@ -456,3 +456,7 @@ select {
     font-weight: 700;
     color: #111827;
 }
+
+.sticker-top a {
+    white-space: nowrap;
+}

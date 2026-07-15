@@ -208,3 +208,52 @@ def get_collection_progress(user_id):
     connection.close()
 
     return total_stickers, collected_stickers, missing_stickers, completion_percentage
+
+def decrease_sticker_quantity(user_id, sticker_number):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT id
+        FROM stickers
+        WHERE sticker_number = ?;
+    """, (sticker_number,))
+
+    sticker = cursor.fetchone()
+
+    if sticker is None:
+        connection.close()
+        return "Sticker not found."
+
+    sticker_id = sticker[0]
+
+    cursor.execute("""
+        SELECT quantity
+        FROM user_collection
+        WHERE user_id = ? AND sticker_id = ?;
+    """, (user_id, sticker_id))
+
+    collection_item = cursor.fetchone()
+
+    if collection_item is None:
+        connection.close()
+        return "Sticker is not in the collection."
+
+    current_quantity = collection_item[0]
+
+    if current_quantity > 1:
+        cursor.execute("""
+            UPDATE user_collection
+            SET quantity = quantity - 1
+            WHERE user_id = ? AND sticker_id = ?;
+        """, (user_id, sticker_id))
+    else:
+        cursor.execute("""
+            DELETE FROM user_collection
+            WHERE user_id = ? AND sticker_id = ?;
+        """, (user_id, sticker_id))
+
+    connection.commit()
+    connection.close()
+
+    return "Sticker quantity decreased."
