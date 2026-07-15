@@ -1,60 +1,70 @@
 # StikerTrak
 FIFA 2026 World Cup Sticker Collection Tracker
+A web application that allows users to digitally track their FIFA World Cup 2026 Panini sticker collection.
 
-## Team Members
+## Application Description
 
-- Alejandro
-- Toriana
-- Michael
-- Rahul
+StikerTrak helps FIFA World Cup sticker collectors organize and manage their collection in one place. Users can create an account, browse the complete sticker catalog, track owned and missing stickers, manage duplicates, and monitor overall collection progress.
 
-### Alejandro 
-*Database / Backend Data
+## Features
 
-To-do:
-- Design the SQLite database
-- Create database schema
-- Import sticker data into the database
-- Store user collections
-- Track owned stickers
-- Track duplicate stickers
-- Calculate missing stickers
-
----
-
-### Toriana Mullins
 * User Authentication
+  - Create a new account
+  - Secure login and logout
+  - Password validation
+  - Session management
 
-To-do:
-- User registration
-- User login/logout
-- Password validation
-- Session management
-- Each user's collection is stored separately
+* Sticker Collection
+  - Browse all FIFA World Cup 2026 stickers
+  - Search stickers by number or name
+  - Filter stickers by:
+    - All
+    - Owned
+    - Missing
+    - Duplicates
+  - Sort stickers by:
+    - Sticker Number
+    - Sticker Name
+    - Quantity Owned
+  -  Add and remove stickers from a collection
+  - Track collection progress
 
----
+## Installation & Setup
 
-### Rahul Rayarala
-* Collection Features
+  1. Clone the repository
 
-To-do:
-- Collection page
-- Add owned stickers
-- View missing stickers
-- View duplicate stickers
-- Update collection after opening sticker packs
-- Connect collection pages to the database
+```bash
+git clone https://github.com/<your-username>/StikerTrak.git
+```
 
----
+  2. Navigate to the project directory
 
-### Michael Sutu
-* Frontend / UI
+```bash
+cd StikerTrak
+```
 
-To-do:
-- Homepage
-- Navigation bar
-- Overall website layout
-- CSS styling
-- Responsive design
-- User-friendly interface
+  3. Install the required packages
 
+```bash
+pip install -r requirements.txt
+```
+
+  4. Initialize the database
+
+```bash
+py init_db.py
+```
+
+  5. Start the application
+
+```bash
+py backend/app.py
+```
+
+  6. Open your browser
+
+Go to:
+
+```
+http://127.0.0.1:5000
+```
