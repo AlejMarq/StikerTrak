@@ -29,12 +29,18 @@ StikerTrak helps FIFA World Cup sticker collectors organize and manage their col
   -  Add and remove stickers from a collection
   - Track collection progress
 
+## Prerequisites
+
+- Python 3.13 or newer
+- Visual Studio Code or another code editor
+- Git
+
 ## Installation & Setup
 
   1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/StikerTrak.git
+git clone https://github.com/AlejMarq/StikerTrak.git
 ```
 
   2. Navigate to the project directory
