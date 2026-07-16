@@ -15,7 +15,7 @@
 
 <body>
     <nav class="split">
-        <a><span class="logo-green">Stiker</span>Trackr</a>
+        <a><span class="logo-green">Stiker</span>Trak</a>
         <div class="center nav-options">
             <a href="/">Home</a>
             <a href="/collection">Collection</a>
@@ -31,7 +31,7 @@
             <h2>Create Your Account</h2>
             <p>Join and start tracking your sticker collection</p>
             {% if signup_error %}
-                <h3>{{ signup_error }}</h3>
+                <h3 class="error-message">{{ signup_error }}</h3>
             {% endif %}
 
             <form method="POST">

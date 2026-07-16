@@ -15,7 +15,7 @@
 
 <body>
     <nav class="split">
-        <a><span class="logo-green">Stiker</span>Trackr</a>
+        <a><span class="logo-green">Stiker</span>Trak</a>
         <div class="center nav-options">
             <a href="/">Home</a>
             <a href="/collection">Collection</a>
@@ -68,9 +68,9 @@
                     <div class="sticker-top">
                         <a>{{ sticker[0] }}</a>
                         {% if sticker[0] in owned_stickers %}
-                            <img src="/frontend/img/icon-check.png">
+                            <span class="status-icon owned">✓</span>
                         {% else %}
-                            <img src="/frontend/img/icon-x.png">
+                            <span class="status-icon missing">✕</span>
                         {% endif %}
                     </div>
                         <h3>{{ sticker[3] }}</h3>
@@ -112,12 +112,18 @@
         let activeFilter = "all";
 
         function applyFilters() {
-            const searchText = searchInput.value.toLowerCase();
+            const searchText = searchInput.value
+                .toLowerCase()
+                .replace(/[\s-]/g, "")
+                .replace(/([a-z]+)0+(\d+)/g, "$1$2");
 
             stickerCards.forEach(function(card) {
-                const cardText = card.textContent.toLowerCase();
+                const cardText = card.textContent
+                    .toLowerCase()
+                    .replace(/[\s-]/g, "")
+                    .replace(/([a-z]+)0+(\d+)/g, "$1$2");
                 const matchesSearch = cardText.includes(searchText);
-                const isOwned = card.querySelector('img[src*="icon-check.png"]') !== null;
+                const isOwned = card.querySelector(".status-icon.owned") !== null;
 
                 const quantityElement = card.querySelector(".quantity");
                 const isDuplicate =
@@ -144,6 +150,15 @@
                     card.style.display = "none";
                 }
             });
+        }
+
+        function updateSelectedTab(selectedTab) {
+            allFilter.classList.remove("selected");
+            ownedFilter.classList.remove("selected");
+            missingFilter.classList.remove("selected");
+            duplicatesFilter.classList.remove("selected");
+
+            selectedTab.classList.add("selected");
         }
 
         function applySorting() {
@@ -197,24 +212,28 @@
 
         ownedFilter.addEventListener("click", function () {
             activeFilter = "owned";
+            updateSelectedTab(ownedFilter);
             applyFilters();
         });
 
 
         missingFilter.addEventListener("click", function () {
             activeFilter = "missing";
+            updateSelectedTab(missingFilter);
             applyFilters();
         });
 
 
         allFilter.addEventListener("click", function () {
             activeFilter = "all";
+            updateSelectedTab(allFilter);
             applyFilters();
         });
 
 
         duplicatesFilter.addEventListener("click", function () {
             activeFilter = "duplicates";
+            updateSelectedTab(duplicatesFilter);
             applyFilters();
         });
 

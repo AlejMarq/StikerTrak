@@ -9,6 +9,24 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Inter", sans-serif;
+
+    background-color: #f8fafc;
+
+    background-image:
+        linear-gradient(30deg,
+            rgba(21, 128, 61, 0.03) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            rgba(21, 128, 61, 0.03) 87.5%,
+            rgba(21, 128, 61, 0.03)),
+        linear-gradient(150deg,
+            rgba(21, 128, 61, 0.03) 12%,
+            transparent 12.5%,
+            transparent 87%,
+            rgba(21, 128, 61, 0.03) 87.5%,
+            rgba(21, 128, 61, 0.03));
+
+    background-size: 60px 35px;
 }
 
 .split {
@@ -146,7 +164,7 @@ label {
 
 input {
     font-family: "Inter", sans-serif;
-    border: var(--light-border);
+    border: 2px solid #6b7280;
     border-radius: 8px;
     font-size: 14px;
     padding: 10px;
@@ -271,9 +289,11 @@ input {
 }
 
 .container-progress {
-    border: var(--light-border);
+    border: 2px solid #6b7280;
     padding: 30px;
     border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 6px 16px rgba(0,0,0,.18);
 }
 
 .container-progress h3 {
@@ -303,13 +323,15 @@ input {
 }
 
 .catalog {
-    border: var(--light-border);
+    border: 2px solid #6b7280;
     border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 6px 16px rgba(0,0,0,.18);
     width: calc(100% - 60px);
 }
 
 .catalog .top {
-    border-bottom: var(--light-border);
+    border-bottom: 2px solid #d1d5db;
     padding: 15px;
 }
 
@@ -362,6 +384,7 @@ select {
 
 .stickers {
     display: flex;
+    flex-wrap: wrap;
     align-items: start;
     justify-content: start;
     padding: 15px;
@@ -373,6 +396,16 @@ select {
     border: var(--light-border);
     border-radius: 8px;
     height: 360px;
+    background: #ffffff;
+    box-shadow: 0 6px 16px rgba(0,0,0,.18); 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.sticker:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.16);
 }
 
 .sticker>img {
@@ -394,14 +427,17 @@ select {
 }
 
 .sticker-top a {
-    height: 30px;
-    width: 30px;
-    background-color: white;
-    border-radius: 50px;
-    border: var(--light-border);
-    display: flex;
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
     z-index: 5;
 }
 
@@ -457,6 +493,57 @@ select {
     color: #111827;
 }
 
-.sticker-top a {
-    white-space: nowrap;
+.error-message {
+    color: #dc2626;
+    font-weight: 600;
+    margin: 15px 0;
+}
+
+.status-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.status-icon.owned {
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+.status-icon.missing {
+    background: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.sticker::before {
+    content: "";
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    right: -25px;
+    bottom: -25px;
+
+    background-image: url("../img/card-watermark.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    opacity: 0.12;
+
+    pointer-events: none;
+    z-index: 0;
+}
+
+.sticker > * {
+    position: relative;
+    z-index: 1;
 }
