@@ -6,6 +6,13 @@ A web application that allows users to digitally track their FIFA World Cup 2026
 
 StikerTrak helps FIFA World Cup sticker collectors organize and manage their collection in one place. Users can create an account, browse the complete sticker catalog, track owned and missing stickers, manage duplicates, and monitor overall collection progress.
 
+## Team Member Contributions
+
+- **Alejandro** – Database Design, Backend Development, Frontend-Backend Integration
+- **Toriana** – User Authentication
+- **Rahul** – Sticker Collection Features
+- **Michael** – Frontend Development and User Interface Design
+
 ## Features
 
 * User Authentication
